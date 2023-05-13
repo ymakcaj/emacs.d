@@ -1,0 +1,17 @@
+;; Emacs-W3 HTTP cookies file
+;; Automatically generated file!!! DO NOT EDIT!!!
+
+(setq url-cookie-storage
+ 'nil)
+(setq url-cookie-secure-storage
+ '(("accounts.google.com"
+  [url-cookie "__Host-GAPS" "1:1sUDeuz-nP4APazpUH6GfBjutgCslQ:wwTCLQTKXl5fHfoV" "Wed, 07-May-2025 10:21:07 GMT" "/" "accounts.google.com" t]))
+)
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; coding: utf-8-emacs-unix
+;; End:
+
+;;; cookies ends here
