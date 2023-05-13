@@ -5,7 +5,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(pyenv-mode doom-themes ace-window bind-key ein eink-theme lsp-pyright)))
+   '(pyenv-mode doom-themes ace-window bind-key ein eink-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -50,11 +50,11 @@
 
 (require 'use-package)
 
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-			 (require 'lsp-pyright)
-			 (lsp)))) ; or lsp-deferred
+;; (use-package lsp-pyright
+;;   :ensure t
+;;   :hook (python-mode . (lambda ()
+;; 			 (require 'lsp-pyright)
+;; 			 (lsp)))) ; or lsp-deferred
 
 (use-package doom-themes
   :ensure t
@@ -117,10 +117,10 @@
   :after lsp-java
   :bind (:map java-mode-map ("C-c i" . lsp-java-add-import)))
 
-(use-package lsp-pyright
-  :hook (python-mode . (lambda () (require 'lsp-pyright)))
-  :init (when (executable-find "python3")
-          (setq lsp-pyright-python-executable-cmd "python3")))
+;; (use-package lsp-pyright
+;;   :hook (python-mode . (lambda () (require 'lsp-pyright)))
+;;   :init (when (executable-find "python3")
+;;           (setq lsp-pyright-python-executable-cmd "python3")))
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
