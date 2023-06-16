@@ -32,7 +32,8 @@
     ein                             ;; Jupyter notebook for Emacs
     flycheck                        ;; On the fly syntax checking
     py-autopep8                     ;; Run autopep8 on save
-    blacken                         ;; Black formatting on save
+    blacken
+    ;; Black formatting on save
     ;; java modules
     jdee                            ;; testing, to set up a java dev Environment
     ;; theme modules
@@ -107,16 +108,19 @@
 ;; Set the syntax checker command (e.g., flake8)
 (setq flycheck-python-flake8-executable "C:/Users/jack.amy/anaconda3/Scripts/flake8.exe")
 
-;; Disable RPC virtualenv
-;;(setq elpy-rpc-virtualenv-path "C:/Users/user/anaconda3/envs/base")
-(setq elpy-rpc-virtualenv-path 'current)
+;;Disable RPC virtualenv
+(setq elpy-rpc-virtualenv-path "C:/Users/user/anaconda3/envs/base")
+(setq elpy-rpc-virtualenv-path 'nil)
+;; (setq elpy-rpc-python-command "C:/users/jack.amy/anaconda3/python.exe") 
+;; if using elpy, don't save pre compiling
+(setq compilation-ask-about-save nil)
 
-;; Enable autopep8
-(require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;; ;; Enable autopep8
+;; (require 'py-autopep8)
+;; (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
 ;; ;; Use IPython for REPL
-;; (setq python-shell-interpreter "C:/Users/jack.amy/anaconda3/python.exe"
+;; (setq python-shell-interpreter "C:/Users/jack.amy/anaconda3/pythonw.exe"
 ;; ;;(setq python-shell-interpreter "C:/Users/jack.amy/anaconda3/Scripts/jupyter.exe"
 ;;       python-shell-interpreter-args "console --simple-prompt"
 ;;       python-shell-prompt-detect-failure-warning nil)
