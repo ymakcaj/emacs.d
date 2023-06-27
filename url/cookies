@@ -2,16 +2,18 @@
 ;; Automatically generated file!!! DO NOT EDIT!!!
 
 (setq url-cookie-storage
- 'nil)
+ '((".ft.com"
+  [url-cookie "FTAllocation" "d638c3c1-f43c-491d-bd8c-68c9170f44eb" "Sat, 15 Jun 2024 09:41:40 GMT" "/" ".ft.com" nil]
+  [url-cookie "spoor-id" "d3135849-8dc2-448d-bd1c-a83c1ada45e1" "Thu May 26 07:08:22 2033 GMT" "/" ".ft.com" nil]))
+)
 (setq url-cookie-secure-storage
  '(("accounts.google.com"
-  [url-cookie "__Host-GAPS" "1:1sUDeuz-nP4APazpUH6GfBjutgCslQ:wwTCLQTKXl5fHfoV" "Wed, 07-May-2025 10:21:07 GMT" "/" "accounts.google.com" t]))
+  [url-cookie "__Host-GAPS" "1:1sUDeuz-nP4APazpUH6GfBjutgCslQ:wwTCLQTKXl5fHfoV" "Wed, 07-May-2025 10:21:07 GMT" "/" "accounts.google.com" t])
+ ("realpython.com"
+  [url-cookie "csrftoken" "ayppPRhbf6KVzVVV5DrIgtmhxwaTnEao" "Tue May 14 18:57:46 2024 GMT" "/" "realpython.com" t]))
 )
-
+
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
-;; coding: utf-8-emacs-unix
 ;; End:
-
-;;; cookies ends here

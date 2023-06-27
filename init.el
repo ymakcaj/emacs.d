@@ -33,6 +33,7 @@
     flycheck                        ;; On the fly syntax checking
     py-autopep8                     ;; Run autopep8 on save
     blacken
+    ;; jupyter
     ;; Black formatting on save
     ;; java modules
     jdee                            ;; testing, to set up a java dev Environment
@@ -109,11 +110,14 @@
 (setq flycheck-python-flake8-executable "C:/Users/jack.amy/anaconda3/Scripts/flake8.exe")
 
 ;;Disable RPC virtualenv
-(setq elpy-rpc-virtualenv-path "C:/Users/user/anaconda3/envs/base")
-(setq elpy-rpc-virtualenv-path 'nil)
-;; (setq elpy-rpc-python-command "C:/users/jack.amy/anaconda3/python.exe") 
+;; (setq elpy-rpc-virtualenv-path "C:/Users/user/anaconda3/envs/base")
+;; (setq elpy-rpc-virtualenv-path 'nil)
+(setq elpy-rpc-python-command "C:/users/jack.amy/anaconda3/python.exe") 
 ;; if using elpy, don't save pre compiling
 (setq compilation-ask-about-save nil)
+
+;; (setq jupyter-repl-echo-eval-p t)
+
 
 ;; ;; Enable autopep8
 ;; (require 'py-autopep8)
@@ -245,18 +249,52 @@
 
 
 
-(use-package doom-themes
-  :ensure t
-    :config
-  ;; glob settings (defaults)
-  (setq doom-themes-enable-bold t)
-	;doom-themes-enable-italic t)
-  (load-theme 'doom-one t)
+;; (use-package doom-themes
+;;   :ensure t
+;;     :config
+;;   ;; glob settings (defaults)
+;;   (setq doom-themes-enable-bold t)
+;; 	;doom-themes-enable-italic t)
+;;   (load-theme 'doom-one t)
 
-  ;; to enable flashing mode for errors
-  (doom-themes-visual-bell-config)
-  ;; to enable neo-tree format
-  (doom-themes-neotree-config))
+;;   ;; to enable flashing mode for errors
+;;   (doom-themes-visual-bell-config)
+;;   ;; to enable neo-tree format
+;;   (doom-themes-neotree-config))
+
+(use-package timu-rouge-theme
+  :ensure t
+  :config
+  (load-theme 'timu-rouge t))
+
+(customize-set-variable 'timu-rouge-scale-org-document-title t)
+(customize-set-variable 'timu-rouge-scale-org-document-info t)
+(customize-set-variable 'timu-rouge-scale-org-level-1 t)
+(customize-set-variable 'timu-rouge-scale-org-level-2 t)
+(customize-set-variable 'timu-rouge-scale-org-level-3 t)
+
+(customize-set-variable 'timu-rouge-org-intense-colors t)
+
+(customize-set-variable 'timu-rouge-mode-line-border t)
+
+
+
+
+
 
 ;; (setenv "WORKON_HOME" "C:/Users/jack.amy/anaconda3") ; /anaconda3 || /miniconda || wathever path your conda installation is located at
 ;; (pyvenv-mode 1)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(timu-rouge-theme which-key wc-mode use-package sweet-theme quiz python-mode pyenv-mode py-autopep8 projectile material-theme markdown-preview-mode lsp-ui lsp-pyright lsp-java jedi jdee helm-lsp elpy eink-theme ein doom-themes blacken better-defaults))
+ '(warning-suppress-types '(((flymake flymake)))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+; )

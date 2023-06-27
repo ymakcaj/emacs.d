@@ -1,0 +1,2 @@
+;;; Generated package description from better-defaults.el  -*- no-byte-compile: t -*-
+(define-package "better-defaults" "20230512.1614" "Fixing weird quirks and poor defaults" '((emacs "25.1")) :commit "99e96ba100ab8d5424f36f9087ca26c2e8a981bd" :authors '(("Phil Hagelberg")) :maintainers '(("Phil Hagelberg")) :maintainer '("Phil Hagelberg") :keywords '("convenience") :url "https://github.com/technomancy/better-defaults")

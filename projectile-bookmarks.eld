@@ -1,0 +1,1 @@
+("~/.emacs.d/" "c:/Users/jack.amy/currency-exchanger/")
