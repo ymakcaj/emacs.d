@@ -1,0 +1,113 @@
+#^^
+
+import pandas as pd
+import datetime as dt
+from mpy import mpy_utils
+import json
+import requests
+
+
+print('Enter the ticker:')
+ticker = input()
+print('Enter the cutoff_id')
+cutoff_id = int(input())
+
+def save_json(json_object: dict, ptf_id:int, ticker:str,text:str=''):
+
+    ticker = ticker.replace(' ','_')
+
+    date = dt.datetime.strftime(dt.datetime.today(),"%Y%m%d")
+
+    with open(rf"G:\Shared drives\AAT\Market Insights Infrastructure\_MIAlibrary\codes_repository\trading_manual_orders\trades_history/{date}_{cutoff_id}_{ptf_id}_{ticker}_orders{response}.json", "w") as outfile:
+        outfile.write(json_object)
+
+query=rf'''
+select 
+	cp.portfolio_id
+        ,mp.account
+	,mt.cash_order_qty as 'quantity'
+	,cpo.quantity * b.limit_price as 'quantity_check'
+	,i.exchange_id as 'exchange'
+        ,i.bloomberg_ticker
+	,b.isin 
+	,b.limit_price as 'limitPrice'
+	,case 
+		when b.side = 1 then 'BUY'
+		when b.side = 2 then 'SELL'
+	end as 'side'
+from moe.cutoff_portfolio_order cpo 
+left join moe.cutoff_portfolio cp on cp.id = cpo.cutoff_portfolio_id 
+left join moe.block b on b.id = cpo.block_id 
+left join mf_lisa_rto.mf_trade mt on mt.order_id = b.lisa_order_id and mt.portfolio_id = cp.portfolio_id 
+left join apu.instrument i on i.isin = b.isin and i.exchange = b.exchange
+join mf_lisa_rto.mf_portfolio mp on mp.id = cp.portfolio_id
+where i.bloomberg_ticker = '{ticker}'
+and b.cutoff_id = {cutoff_id}
+order by cp.portfolio_id desc;
+'''
+
+
+
+df = mpy_utils.get_SQL_data(
+    query=query,
+    db='prod'
+)
+
+# print(df)
+
+for i in df.index:
+
+    json_dict = {
+	"allocations":[
+		{"portfolioId":int(df.loc[i,'portfolio_id']), "quantity":float(df.loc[i,'quantity']) }
+	],
+	"exchange":df.loc[i,'exchange'],
+	"isin":df.loc[i,'isin'],
+	"limitPrice": float(df.loc[i,'limitPrice']),
+	"side":df.loc[i,'side']
+    }
+
+    json_object = json.dumps(json_dict)
+
+    save_json(json_object, df.loc[i,'portfolio_id'],df.loc[i,'bloomberg_ticker'])
+    
+    print('\n',df.loc[i,:],'\n')
+
+    url = 'https://lisa.production.k8s.moneyfarm.com/trades/block'
+    print(url)
+
+    print(
+        rf'''
+        for ptf if {df.loc[i,'portfolio_id']} and saxo account {df.loc[i,'account']}
+        we will send this order
+
+        {json_dict}
+
+        are you happy to proceed? (y for yes, anything else will move to the next customer')
+        
+        '''
+    )
+
+    x = input()
+
+    if x == 'y':
+        headers = {"Content-Type": "application/json"}
+
+        r = requests.post(url, headers=headers,json=json_dict)
+        save_json(json_object, df.loc[i,'portfolio_id'],df.loc[i,'bloomberg_ticker'],'_response')
+        print(r.json(),'\n')
+    else:
+        print(rf'order not sent')
+        
+
+    
+
+
+
+
+
+df.to_csv(rf'G:\Shared drives\AAT\AAT Responsibilities\Trading\manual_trade_log\{cutoff_id}_manual_trades.csv')      
+    
+
+
+
